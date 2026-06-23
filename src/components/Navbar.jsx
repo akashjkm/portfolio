@@ -1,9 +1,10 @@
+
 import { useState, useEffect } from "react";
 
 const LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About Me" },
+  { href: "#projects", label: "Work & Projects" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -12,85 +13,113 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 border-b transition-colors ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0A0A0A]/90 backdrop-blur-md border-[#1F1F1F]"
-          : "bg-transparent border-transparent"
-      }`}
+          ? "bg-black/95 backdrop-blur-md shadow-lg"
+          : "bg-black"
+      } border-b border-cyan-500/30`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="h-20 flex items-center justify-between">
+          
+          {/* Logo */}
+          <a
+            href="#"
+            className="text-3xl font-bold text-cyan-400 hover:text-cyan-300 transition"
+          >
+            Akash Singh
+          </a>
 
-        <a href="#" className="font-[Space_Grotesk] text-xl font-bold text-[#E8E6E1]">
-          akash<span className="text-[#7C9A92]">.singh</span>
-        </a>
-
-        {/* desktop links */}
-        <ul className="hidden md:flex items-center gap-8 font-mono text-sm text-[#A8A5A0]">
-          {LINKS.map((link, i) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="group inline-flex items-center gap-1 hover:text-[#7C9A92] transition-colors"
-              >
-                <span className="text-[#6B6864] group-hover:text-[#7C9A92] transition-colors">
-                  0{i + 1}
-                </span>
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* mobile toggle */}
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          className="md:hidden relative w-8 h-8 flex items-center justify-center text-[#E8E6E1]"
-        >
-          <span
-            className={`absolute block w-5 h-[1.5px] bg-current transition-transform ${
-              open ? "rotate-45" : "-translate-y-[5px]"
-            }`}
-          />
-          <span
-            className={`absolute block w-5 h-[1.5px] bg-current transition-transform ${
-              open ? "-rotate-45" : "translate-y-[5px]"
-            }`}
-          />
-        </button>
-      </div>
-
-      {/* mobile menu */}
-      <div
-        className={`md:hidden grid transition-all duration-300 ease-in-out ${
-          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <ul className="flex flex-col gap-1 px-6 pb-6 font-mono text-sm text-[#A8A5A0] border-t border-[#1F1F1F] bg-[#0A0A0A]">
-            {LINKS.map((link, i) => (
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex items-center gap-10 text-white font-medium">
+            {LINKS.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-2 py-3 hover:text-[#7C9A92] transition-colors"
+                  className="hover:text-cyan-400 transition duration-300"
                 >
-                  <span className="text-[#6B6864]">0{i + 1}</span>
                   {link.label}
                 </a>
               </li>
             ))}
           </ul>
+
+          {/* Right Buttons */}
+          <div className="hidden md:flex items-center gap-4">
+          <a
+  href="mailto:akashthakur9318@gmail.com"
+  className="px-5 py-2 border border-cyan-500 text-cyan-400 rounded-md hover:bg-cyan-500 hover:text-black transition"
+>
+  Mail Me
+</a>
+
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2 bg-cyan-500 text-black rounded-md hover:bg-cyan-400 transition font-medium"
+            >
+              Download Resume
+            </a>
+          </div>
+
+          {/* Mobile Button */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden text-white"
+          >
+            ☰
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {open && (
+        <div className="md:hidden bg-black border-t border-cyan-500/20">
+          <ul className="flex flex-col p-6 gap-5 text-white">
+            {LINKS.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="hover:text-cyan-400"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="px-6 pb-6 flex flex-col gap-3">
+            <a
+              href="mailto:yourmail@gmail.com"
+              className="border border-cyan-500 text-cyan-400 py-2 text-center rounded-md"
+            >
+              Mail Me
+            </a>
+
+            <a
+              href="/resume.pdf"
+              className="bg-cyan-500 text-black py-2 text-center rounded-md font-medium"
+            >
+              Download Resume
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

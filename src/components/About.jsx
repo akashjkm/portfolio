@@ -1,64 +1,151 @@
 export default function About() {
-  return (
-    <section id="about" className="relative py-28 px-6 bg-[#0A0A0A]">
-      <div className="max-w-5xl mx-auto">
+  const focusAreas = [
+    "React.js Development",
+    "Next.js Applications",
+    "Responsive Web Design",
+    "Tailwind CSS",
+    "JavaScript ES6+",
+    "REST API Integration",
+    "Performance Optimization",
+    "UI Development",
+  ];
 
-        {/* section label — matches navbar's 0X system */}
+  return (
+    <section
+      id="about"
+      className="relative py-28 px-6 bg-[#0A0A0A] border-t border-[#1F1F1F]"
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Section Label */}
         <p className="font-mono text-sm text-[#7C9A92] mb-4">
           <span className="text-[#6B6864]">01.</span> about
         </p>
 
-        <h2 className="font-[Space_Grotesk] text-4xl md:text-5xl font-bold text-[#E8E6E1] mb-12">
-          A bit about how I work
+        <h2 className="font-[Space_Grotesk] text-4xl md:text-5xl font-bold text-[#E8E6E1] mb-14">
+          About Me
         </h2>
 
-        <div className="grid md:grid-cols-[1.2fr_1fr] gap-12 md:gap-16">
+        <div className="grid lg:grid-cols-[1.6fr_1fr] gap-16">
+          {/* Left Content */}
+          <div>
+            <h3 className="text-2xl md:text-3xl font-semibold text-[#E8E6E1] mb-8">
+              Frontend Developer & Computer Science Graduate
+            </h3>
 
-          {/* main copy */}
-          <div className="space-y-5 text-[#A8A5A0] leading-relaxed">
-            <p>
-              I'm a frontend developer who enjoys turning rough ideas into
-              interfaces that feel obvious to use. Most of my work is in
-              React and Tailwind CSS — building things that load fast,
-              hold up on a small screen, and don't make the user think
-              twice about where to click.
-            </p>
-            <p>
-              I pay close attention to the small stuff: spacing, loading
-              states, what happens when something goes wrong. The
-              difference between a good interface and a forgettable one
-              is usually in details like that.
-            </p>
-            <p>
-              Outside of layouts and components, I'm usually reading
-              up on whatever's new in the React ecosystem, or rebuilding
-              something I've already built — just to do it cleaner the
-              second time.
-            </p>
+            <div className="space-y-6 text-[#A8A5A0] leading-8">
+              <p>
+                Hey! I'm{" "}
+                <span className="text-[#7C9A92] font-medium">
+                  Akash Singh
+                </span>
+                , a Frontend Developer passionate about building modern,
+                responsive and user-friendly web applications.
+              </p>
+
+              <p>
+                My primary focus is on React.js, Next.js, Tailwind CSS and
+                JavaScript. I enjoy transforming ideas into clean interfaces
+                that are fast, accessible and easy to use.
+              </p>
+
+              <p>
+                I completed my Diploma in Computer Science Engineering from
+                Galgotias Educational Institutions and later pursued B.Tech in
+                Computer Science & Engineering from Lloyd Institute of
+                Engineering & Technology, graduating in 2025.
+              </p>
+
+              <p>
+                Throughout my learning journey, I have worked on portfolio
+                websites, PDF tools, landing pages and web applications while
+                continuously improving my frontend development skills.
+              </p>
+
+              <p>
+                I am passionate about learning new technologies, solving
+                real-world problems and creating digital experiences that
+                deliver value to users.
+              </p>
+            </div>
+
+            {/* Focus Areas */}
+            <div className="mt-14">
+              <h4 className="text-[#E8E6E1] text-xl font-semibold mb-6">
+                My Key Focus Areas
+              </h4>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                {focusAreas.map((item) => (
+                  <div
+                    key={item}
+                    className="border border-[#1F1F1F] rounded-xl p-4 text-[#A8A5A0] hover:border-[#7C9A92] hover:text-[#E8E6E1] transition-all duration-300"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* quick facts — structured, not decorative */}
-          <div className="border-l border-[#1F1F1F] pl-8 space-y-6">
-            <div>
-              <p className="font-mono text-xs text-[#6B6864] uppercase tracking-wider mb-1">
-                Focus
-              </p>
-              <p className="text-[#E8E6E1]">React &amp; Tailwind CSS</p>
+          {/* Right Side */}
+          <div className="lg:border-l border-[#1F1F1F] lg:pl-10">
+            <h4 className="text-[#E8E6E1] text-xl font-semibold mb-8">
+              Education
+            </h4>
+
+            <div className="space-y-10">
+              <div>
+                <p className="font-mono text-[#7C9A92] text-sm">2019</p>
+
+                <h5 className="text-[#E8E6E1] font-medium mt-2">
+                  10th Standard (CBSE)
+                </h5>
+
+                <p className="text-[#A8A5A0] text-sm mt-1">
+                  Government Senior Secondary School
+                </p>
+              </div>
+
+              <div>
+                <p className="font-mono text-[#7C9A92] text-sm">2022</p>
+
+                <h5 className="text-[#E8E6E1] font-medium mt-2">
+                  Diploma in Computer Science Engineering
+                </h5>
+
+                <p className="text-[#A8A5A0] text-sm mt-1">
+                  Galgotias Educational Institutions
+                </p>
+              </div>
+
+              <div>
+                <p className="font-mono text-[#7C9A92] text-sm">2025</p>
+
+                <h5 className="text-[#E8E6E1] font-medium mt-2">
+                  B.Tech in Computer Science & Engineering
+                </h5>
+
+                <p className="text-[#A8A5A0] text-sm mt-1">
+                  Lloyd Institute of Engineering & Technology (AKTU)
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="font-mono text-xs text-[#6B6864] uppercase tracking-wider mb-1">
-                Based in
-              </p>
-              <p className="text-[#E8E6E1]">India</p>
-            </div>
-            <div>
-              <p className="font-mono text-xs text-[#6B6864] uppercase tracking-wider mb-1">
-                Currently
-              </p>
-              <p className="text-[#E8E6E1]">Open to opportunities</p>
+
+            {/* Quick Facts */}
+            <div className="mt-14">
+              <h4 className="text-[#E8E6E1] text-xl font-semibold mb-6">
+                Quick Facts
+              </h4>
+
+              <div className="space-y-4 text-[#A8A5A0]">
+                <p>📍 India</p>
+                <p>🎓 B.Tech CSE Graduate (2025)</p>
+                <p>💻 Frontend Developer</p>
+                <p>⚛️ React & Next.js Enthusiast</p>
+                <p>🚀 Open to Opportunities</p>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

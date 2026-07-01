@@ -1,10 +1,8 @@
-
 import { useState, useEffect } from "react";
 
 const LINKS = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About Me" },
-  { href: "#projects", label: "Work & Projects" },
+  { href: "#about", label: "About" },
+  { href: "#projects", label: "Work" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -14,112 +12,121 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 30);
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-black/95 backdrop-blur-md shadow-lg"
-          : "bg-black"
-      } border-b border-cyan-500/30`}
+          ? "bg-[#090909]/90 backdrop-blur-xl border-b border-white/10"
+          : "bg-transparent"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="h-20 flex items-center justify-between">
-          
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="h-24 flex items-center justify-between">
+
           {/* Logo */}
           <a
-            href="#"
-            className="text-3xl font-bold text-cyan-400 hover:text-cyan-300 transition"
+            href="#home"
+            className="text-white uppercase tracking-[0.35em] text-lg font-light"
           >
-            Akash Singh
+            AKASH
           </a>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex items-center gap-10 text-white font-medium">
-            {LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="hover:text-cyan-400 transition duration-300"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <nav className="hidden md:flex items-center gap-16">
 
-          {/* Right Buttons */}
-          <div className="hidden md:flex items-center gap-4">
-          <a
-  href="mailto:akashthakur9318@gmail.com"
-  className="px-5 py-2 border border-cyan-500 text-cyan-400 rounded-md hover:bg-cyan-500 hover:text-black transition"
->
-  Mail Me
-</a>
+            {LINKS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="uppercase tracking-[0.25em] text-xs text-zinc-300 hover:text-white transition duration-300"
+              >
+                {item.label}
+              </a>
+            ))}
+
+          </nav>
+
+          {/* Right Side */}
+          <div className="hidden md:flex items-center gap-10">
+
+            <a
+              href="mailto:akashthakur9318@gmail.com"
+              className="uppercase tracking-[0.25em] text-xs text-zinc-400 hover:text-white transition"
+            >
+              Email
+            </a>
 
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2 bg-cyan-500 text-black rounded-md hover:bg-cyan-400 transition font-medium"
+              className="border border-zinc-700 px-6 py-3 uppercase tracking-[0.2em] text-xs hover:bg-white hover:text-black transition duration-500"
             >
-              Download Resume
+              Resume
             </a>
+
           </div>
 
           {/* Mobile Button */}
+
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden text-white"
+            className="md:hidden text-white text-3xl"
           >
             ☰
           </button>
+
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden bg-black border-t border-cyan-500/20">
-          <ul className="flex flex-col p-6 gap-5 text-white">
-            {LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="hover:text-cyan-400"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
 
-          <div className="px-6 pb-6 flex flex-col gap-3">
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-500 ${
+          open ? "max-h-96" : "max-h-0"
+        }`}
+      >
+        <div className="bg-[#090909] border-t border-white/10 px-8 py-8">
+
+          {LINKS.map((item) => (
             <a
-              href="mailto:yourmail@gmail.com"
-              className="border border-cyan-500 text-cyan-400 py-2 text-center rounded-md"
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="block py-4 uppercase tracking-[0.2em] text-sm text-zinc-300 hover:text-white"
             >
-              Mail Me
+              {item.label}
+            </a>
+          ))}
+
+          <div className="mt-8 space-y-4">
+
+            <a
+              href="mailto:akashthakur9318@gmail.com"
+              className="block border border-zinc-700 text-center py-3 uppercase tracking-[0.2em] text-xs"
+            >
+              Email
             </a>
 
             <a
               href="/resume.pdf"
-              className="bg-cyan-500 text-black py-2 text-center rounded-md font-medium"
+              className="block bg-white text-black text-center py-3 uppercase tracking-[0.2em] text-xs"
             >
-              Download Resume
+              Resume
             </a>
+
           </div>
+
         </div>
-      )}
-    </nav>
+      </div>
+    </header>
   );
 }
